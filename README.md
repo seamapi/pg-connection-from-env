@@ -9,10 +9,17 @@ Convert environment variables into a usable postgres connection object or postgr
 ## Usage
 
 ```ts
-import getPgConnectionFromEnv from "pg-connection-from-env"
+import getPgConnectionFromEnv, { getConnectionStringFromEnv } from "pg-connection-from-env"
 
 getPgConnectionFromEnv()
-// TODO
+// {
+//   host: 'localhost',
+//   user: 'postgres',
+//   port: 5432,
+//   password: '',
+//   database: 'postgres',
+//   ssl: false
+// }
 
 getPgConnectionFromEnv({
   fallbackDefaults: {
@@ -20,7 +27,17 @@ getPgConnectionFromEnv({
     database: "databaseifenvdoesntprovide",
   },
 })
-// TODO
+// {
+//  host: 'localhost',
+//  user: 'userifenvdoesntprovide',
+//  port: 5432,
+//  password: '',
+//  database: 'databaseifuserdoesntprovide',
+//  ssl: false
+// }
+
+getConnectionStringFromEnv(/* same args as getPgConnectionFromEnv */)
+// "postgresql://postgres:@localhost:5432/postgres"
 ```
 
 ## Arguments
