@@ -1,6 +1,6 @@
 {
   "name": "pg-connection-from-env",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "git@github.com:seamapi/pg-connection-from-env.git",
   "main": "./dist/index.js",
   "scripts": {
