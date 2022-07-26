@@ -71,6 +71,14 @@ export const getPgConnectionFromEnv = (opts: Options = {}) => {
 }
 
 export const getConnectionStringFromEnv = (opts: Options = {}) => {
+  const uri =
+    process.env.POSTGRES_URI ||
+    process.env.PG_URI ||
+    process.env.DATABASE_URL ||
+    process.env.DATABASE_URI
+
+  if (uri) return uri
+
   const { host, password, port, database, user } = getPgConnectionFromEnv(opts)
   // TODO sslmode?
   return `postgresql://${user}:${password}@${host}:${port}/${database}`
