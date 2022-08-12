@@ -77,11 +77,11 @@ export const getConnectionStringFromEnv = (opts: Options = {}) => {
     process.env.DATABASE_URL ||
     process.env.DATABASE_URI
 
-  if (uri) return uri
+  const uriParams = (uri || "").split("?")?.[1] || ""
 
   const { host, password, port, database, user } = getPgConnectionFromEnv(opts)
   // TODO sslmode?
-  return `postgresql://${user}:${password}@${host}:${port}/${database}`
+  return `postgresql://${user}:${password}@${host}:${port}/${database}?${uriParams}`
 }
 
 export default getPgConnectionFromEnv
