@@ -7,6 +7,10 @@
     "build": "tsup ./index.ts --dts"
   },
   "devDependencies": {
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^9.0.1",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/node": "^18.0.6",
     "esbuild": "^0.14.49",
     "tsup": "^6.1.3",
