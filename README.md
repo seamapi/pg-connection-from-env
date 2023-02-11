@@ -9,7 +9,9 @@ Convert environment variables into a usable postgres connection object or postgr
 ## Usage
 
 ```ts
-import getPgConnectionFromEnv, { getConnectionStringFromEnv } from "pg-connection-from-env"
+import getPgConnectionFromEnv, {
+  getConnectionStringFromEnv,
+} from "pg-connection-from-env"
 
 getPgConnectionFromEnv()
 // {
@@ -53,12 +55,12 @@ getConnectionStringFromEnv(/* same args as getPgConnectionFromEnv */)
 
 The following environment variables are used (basically standard postgres env variables)
 
-| Var Name                         | Description                     |
-| -------------------------------- | ------------------------------- |
-| POSTGRES_HOST                    | Postgres Host                   |
-| POSTGRES_PASS, POSTGRES_PASSWORD | Postgres Password               |
-| POSTGRES_DATABASE, POSTGRES_DB   | Postgres Database               |
-| POSTGRES_USER, POSTGRES_USERNAME | Postgres User                   |
-| POSTGRES_PORT                    | Postgres Port                   |
-| POSTGRES_URI, POSTGRES_URL       | Postgres URI `postgresql://...` |
-| POSTGRES_SSL                     | If set, true                    |
+| Var Name                                         | Description                     |
+| ------------------------------------------------ | ------------------------------- |
+| POSTGRES_HOST                                    | Postgres Host                   |
+| POSTGRES_PASS, POSTGRES_PASSWORD                 | Postgres Password               |
+| POSTGRES_DATABASE, POSTGRES_DB                   | Postgres Database               |
+| POSTGRES_USER, POSTGRES_USERNAME                 | Postgres User                   |
+| POSTGRES_PORT                                    | Postgres Port                   |
+| POSTGRES_URI, POSTGRES_URL, PG_URI, DATABASE_URL | Postgres URI `postgresql://...` |
+| POSTGRES_SSL                                     | If set, true                    |
