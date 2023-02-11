@@ -4,6 +4,7 @@
   "repository": "git@github.com:seamapi/pg-connection-from-env.git",
   "main": "./dist/index.js",
   "scripts": {
+    "test": "ava",
     "build": "tsup ./index.ts --dts"
   },
   "devDependencies": {
