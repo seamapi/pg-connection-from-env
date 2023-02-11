@@ -6,7 +6,7 @@ interface Options {
   /* If provided, overrides database*/
   database?: string
   /* If provided, overrides process.env */
-  env?: Object
+  env?: any
   /* fallback defaults are used when the environment doesn't have a value */
   fallbackDefaults?: {
     user?: string
@@ -27,10 +27,7 @@ export const getPgConnectionFromEnv = (opts: Options = {}) => {
   } = opts
 
   const uri =
-    process.env.POSTGRES_URI ||
-    process.env.PG_URI ||
-    process.env.DATABASE_URL ||
-    process.env.DATABASE_URI
+    env.POSTGRES_URI || env.PG_URI || env.DATABASE_URL || env.DATABASE_URI
 
   if (uri) {
     const uriObj = parsePg(uri)
@@ -44,44 +41,41 @@ export const getPgConnectionFromEnv = (opts: Options = {}) => {
     }
   } else {
     return {
-      host: process.env.POSTGRES_HOST || defaults.host || "localhost",
+      host: env.POSTGRES_HOST || defaults.host || "localhost",
       user:
         user ||
-        process.env.POSTGRES_USER ||
-        process.env.POSTGRES_USERNAME ||
+        env.POSTGRES_USER ||
+        env.POSTGRES_USERNAME ||
         defaults.user ||
         "postgres",
-      port: process.env.POSTGRES_PORT || defaults.port || 5432,
+      port: env.POSTGRES_PORT || defaults.port || 5432,
       password:
-        process.env.POSTGRES_PASS ||
-        process.env.POSTGRES_PASSWORD ||
-        defaults.password ||
-        "",
+        env.POSTGRES_PASS || env.POSTGRES_PASSWORD || defaults.password || "",
       database:
         database ||
-        process.env.POSTGRES_DATABASE ||
-        process.env.POSTGRES_DB ||
+        env.POSTGRES_DATABASE ||
+        env.POSTGRES_DB ||
         defaults.database ||
         defaults.databaseName ||
         "postgres",
       // TODO more refined ssl handling
-      ssl: process.env.POSTGRES_SSL ? { rejectUnauthorized: false } : false,
+      ssl: env.POSTGRES_SSL ? { rejectUnauthorized: false } : false,
     }
   }
 }
 
 export const getConnectionStringFromEnv = (opts: Options = {}) => {
+  const env = opts.env || process.env
   const uri =
-    process.env.POSTGRES_URI ||
-    process.env.PG_URI ||
-    process.env.DATABASE_URL ||
-    process.env.DATABASE_URI
+    env.POSTGRES_URI || env.PG_URI || env.DATABASE_URL || env.DATABASE_URI
 
   const uriParams = (uri || "").split("?")?.[1] || ""
 
   const { host, password, port, database, user } = getPgConnectionFromEnv(opts)
   // TODO sslmode?
-  return `postgresql://${user}:${password}@${host}:${port}/${database}?${uriParams}`
+  return `postgresql://${user}:${password}@${host}:${port}/${database}${
+    uriParams ? `?${uriParams}` : ""
+  }`
 }
 
 export default getPgConnectionFromEnv
